@@ -1,0 +1,70 @@
+height=[0,1,0,2,1,0,1,3,2,1,2,1]
+max=Math.max(...height)
+columns=height.length
+var x = new Array(columns).fill(0);
+for(i=0;i<columns;i++){
+ x[i]=new Array(max).fill(0)
+}
+
+//definiendo alturas
+
+for(i=0;i<columns;i++){
+  let height_node=height[i]
+
+for(j=0;j<height_node;j++){
+ x[i][j]=1
+}
+}
+
+console.log(x)
+
+for(j=0;j<max;j++){
+  
+let huecos=[]
+let elevaciones=[]
+for(i=1;i<columns;i++){
+
+while(x[i][j]===1){
+  elevaciones.push(i)
+  if(i<(columns-1)){
+    i++
+  }else{
+    break
+  }
+  }
+huecos.push(i)
+}
+
+  console.log(huecos)
+//llenado de agua
+   if (elevaciones.length > 1)
+                {
+                    for (let k = 1; k < elevaciones.length; k++)
+                    {
+                    
+                        for (let m = elevaciones[k - 1] + 1; m < elevaciones[k]; m++)
+                        {
+                            x[m][j] = 2
+                        }
+                    }
+                }
+  
+ 
+}
+console.log(x)
+    //cuenta de los huecos de agua
+            let count = 0
+            for (let i = 0; i < columns; i++)
+            {
+
+
+                for (let j = 0; j < max; j++)
+                {
+                    if (x[i][j] == 2)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+console.log(count)
